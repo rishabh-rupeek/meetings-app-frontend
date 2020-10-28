@@ -11,3 +11,15 @@ export const searchMeetingsForUser = (dateOption,searchItem) => {
         console.log(error);
     })
 }
+
+export const addMeeting = (body) => {
+    return axios.post('http://localhost:3000/api/meetings',body,{
+        headers: {
+            'Authorization': localStorage.getItem( 'token' )
+        }
+    }).then((response) => {
+        return response
+    }).catch((error) => {
+        console.log(error);
+    })
+}

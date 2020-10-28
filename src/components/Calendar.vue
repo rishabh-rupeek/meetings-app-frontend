@@ -5,7 +5,7 @@
         <input type="date" v-model="selectedDate" v-on:input="getMeetings" id="datePicker">
         </div>
         <MeetingsList 
-            :meetings="meetingsList"
+            :meetings="meetings"
         />
     </div>
 </template>
@@ -29,7 +29,7 @@ export default {
             userId:localStorage.getItem('userId'),
             token: localStorage.getItem('token'),
             selectedDate: (new Date()).toISOString().substr(0,10),
-            meetingsList: []
+            meetings: []
         }
     },
     mounted(){
@@ -40,7 +40,7 @@ export default {
             getMeetingsForUser(this.selectedDate)
                 .then((response) => {
                     //console.log(response);
-                    this.meetingsList = response.data;
+                    this.meetings = response.data;
                 }).catch((error) => {
                     console.log(error);
                 })
