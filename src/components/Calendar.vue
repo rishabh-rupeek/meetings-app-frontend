@@ -1,8 +1,13 @@
 <template>
     <div>
-        Calendar
-        {{name}}
-        <input type="date" v-on:input="getMeetings" id="datePicker">
+        Hey {{name}}
+        <div class="float-right">
+        <input type="date" v-model="selectedDate" v-on:input="getMeetings" id="datePicker">
+        </div>
+        <MeetingsList 
+            :meetings="meetingsList"
+            class="meetingsList"
+        />
     </div>
 </template>
 <script>
@@ -12,27 +17,31 @@ export default {
 </script>
 <script>
 import { getMeetingsForUser } from '../services.js/calendar'
+import MeetingsList from './MeetingsList'
 export default {
+    name: 'Calendar',
+    components:{
+        MeetingsList
+    },
     data(){
         return{
             name:localStorage.getItem('name'),
             email:localStorage.getItem('email'),
             userId:localStorage.getItem('userId'),
             token: localStorage.getItem('token'),
+            selectedDate: (new Date()).toISOString().substr(0,10),
             meetingsList: []
         }
     },
     mounted(){
-        document.getElementById('datePicker').valueAsDate = new Date();
-
+        this.getMeetings();
     },
     methods:{
         getMeetings(){
-            const selectedDate = document.getElementById('datePicker').value;
-            console.log(selectedDate);
-            getMeetingsForUser(selectedDate)
+            getMeetingsForUser(this.selectedDate)
                 .then((response) => {
-                    console.log(response);
+                    //console.log(response);
+                    this.meetingsList = response.data;
                 }).catch((error) => {
                     console.log(error);
                 })
@@ -40,3 +49,11 @@ export default {
     }
 }
 </script>
+<style scoped>
+
+</style>
+<style>
+.meetingsList{
+    margin: 2em;
+}
+</style>
