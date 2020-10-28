@@ -1,9 +1,7 @@
 <template>
     <div>
     <form
-        @submit="checkForm"
-        action="localhost:3000/api/auth/login" 
-        method="post"
+        @submit="submitForm"
     >
         Login Form
         <div class="form-group">
@@ -19,6 +17,7 @@
     </div>
 </template>
 <script>
+import { loginWithCredentials } from '../services.js/auth'
 export default {
     name : 'Login',
     data() {
@@ -28,11 +27,19 @@ export default {
         }
     },
     methods:{
-        checkForm : function(e) {
-            console.log('Form filled'+this.email+this.password);
-            // Do API call to backend
-            
+        submitForm : function(e) {
             e.preventDefault();
+            loginWithCredentials(this.email,this.password)
+                .then((response)=>{
+                    console.log(response);
+                    localStorage.setItem('token',response.data.token);
+                    localStorage.setItem('name',response.data.name);
+                    localStorage.setItem('email',response.data.email);
+                    localStorage.setItem('userId',response.data.userId);
+                    this.$router.push(this.$route.query.redirect || '/calendar');
+                }).catch((error)=>{
+                    console.log(error);
+                })
         }
     }    
 }
