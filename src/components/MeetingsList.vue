@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="meetingsList">
         <b-list-group>
             <b-list-group-item
                 v-for="(meeting,index) in meetings" 
@@ -18,5 +18,7 @@ export default {
 }
 </script>
 <style scoped>
-
+.meetingsList{
+    margin: 2em;
+}
 </style>

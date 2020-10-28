@@ -6,7 +6,6 @@
         </div>
         <MeetingsList 
             :meetings="meetingsList"
-            class="meetingsList"
         />
     </div>
 </template>
@@ -53,7 +52,4 @@ export default {
 
 </style>
 <style>
-.meetingsList{
-    margin: 2em;
-}
 </style>
