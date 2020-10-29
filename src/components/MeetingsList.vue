@@ -54,6 +54,7 @@ export default {
             dropFromMeeting(meetingId)
                 .then((response) => {
                     console.log(response);
+                    this.$emit('meeting-dropped');
                 }).catch((err) => {
                     console.log(err);
                 })

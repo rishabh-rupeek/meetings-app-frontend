@@ -56,6 +56,7 @@ export default {
             dropFromTeam(teamId)
                 .then((response)=>{
                     console.log(response);
+                    this.$emit('team-dropped');
                 }).catch((err)=>{
                     console.log(err);
                 })

@@ -22,6 +22,7 @@
         </div>
         <button @click="search">Search</button>
         <MeetingsList 
+            v-on:meeting-dropped="search"
             :meetings="meetingsList"
         />
     </div>

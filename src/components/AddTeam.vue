@@ -59,9 +59,11 @@ export default {
             addTeam(body)
                 .then((response) => {
                     console.log(response);
+                    this.$emit('team-added');    
                 }).catch((error) => {
                     console.log(error);
                 })
+            
         }
     }
 }
