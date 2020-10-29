@@ -37,3 +37,19 @@ export const addUserToMeeting = (email,meetingId) => {
         console.log(error);
     })
 }
+
+export const dropFromMeeting = (meetingId) => {
+    console.log(meetingId);
+    console.log(localStorage.getItem( 'token' ));
+    return axios.patch(`http://localhost:3000/api/meetings/${meetingId}/drop`,{
+        
+    },{
+        headers: {
+            'Authorization': localStorage.getItem( 'token' )
+        }
+    }).then((response) => {
+        return response
+    }).catch((error) => {
+        console.log(error);
+    })
+}

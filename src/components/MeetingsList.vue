@@ -10,7 +10,7 @@
                 <br>
                 {{meeting.name}}
                 <br>
-                <b-button variant="danger">Excuse Yourself</b-button>
+                <b-button @click="excuseFromMeeting(meeting._id)" variant="danger">Excuse Yourself</b-button>
                 <hr>
                 <AddUser
                     :eventId = "meeting._id"
@@ -24,6 +24,7 @@
 <script>
 import AddUser from './AddUser'
 import { getUsers } from '../services.js/users'
+import { dropFromMeeting } from '../services.js/meetings'
 
 export default {
     components:{
@@ -46,7 +47,15 @@ export default {
             if(time > 9){
                 return time;
             }else return '0'+ time;
-        }
+        },
+        excuseFromMeeting(meetingId){
+            dropFromMeeting(meetingId)
+                .then((response) => {
+                    console.log(response);
+                }).catch((err) => {
+                    console.log(err);
+                })
+        }   
     },
     mounted(){
         getUsers().then((response)=>{
