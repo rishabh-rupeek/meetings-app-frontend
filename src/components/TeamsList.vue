@@ -1,11 +1,12 @@
 <template>
     <div id="teamsList">
-        <b-card 
+        <b-card class="col-sm-4"
+            style="margin:1em"
             v-for="(team,index) in teams" 
             :key="index"
             >
             <b-card-text>
-                {{team.name}}
+                <b>{{team.name}}</b>
                 <br>
                 {{team.shortName}}
                 <br>
@@ -13,21 +14,41 @@
             </b-card-text>
             <b-button>Drop from team</b-button>
             <hr>
-            Members: 
-            <span
-            v-for="(teamMember,member_index) in team.members"
-            :key="member_index"
-            >
-            {{teamMember.email}}
-            </span>
+            <AddUser
+                :title = "title"
+                :eventId = "team._id"
+                :users = "team.members"
+                :allUsers = "allUsers"
+            />
         </b-card>
     </div>
 </template>
 <script>
-export default {
+import AddUser from './AddUser'
+import { getUsers } from '../services.js/users'
 
+export default {
+    data(){
+        return{
+            title:"Members",
+            allUsers:[]
+        }
+    },
+    components:{
+        AddUser
+    },
     props:{
         teams:Array
+    },
+    mounted(){
+        getUsers().then((response)=>{
+            //console.log(response.data);
+            response.data.forEach(user => {
+                this.allUsers.push(user.email);
+            });
+        }).catch((err)=>{
+            console.log(err);
+        })
     }
 }
 </script>

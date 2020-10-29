@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b>Attendees: </b>
+        <b> {{this.title}}: </b>
         <span
             v-for="(user,user_index) in usersPresent"
             :key="user_index"
@@ -22,10 +22,12 @@
 </template>
 <script>
 import { addUserToMeeting } from '../services.js/meetings'
+import { addUserToTeam } from '../services.js/teams'
 
 export default {
     name:'AddUser',
     props:{
+        title:String,
         users:Array,
         allUsers:Array,
         eventId:String
@@ -54,21 +56,41 @@ export default {
             console.log(this.eventId);
             console.log(document.getElementById(this.eventId).value);
             
-            const email = document.getElementById(this.eventId).value;
-            const meetingId = this.eventId;
-            
-            addUserToMeeting(email,meetingId)
-                .then((response) => {
-                    console.log(response);
-                    const attendees = response.data.attendees;
-                    this.usersPresent = [];
-                    attendees.forEach(user => {
-                        this.usersPresent.push(user.email);
+            if(this.title === 'Members'){
+
+                const email = document.getElementById(this.eventId).value;
+                const teamId = this.eventId;
+                addUserToTeam(email,teamId)
+                    .then((response) => {
+                        console.log(response);
+                        const members = response.data.members;
+                        this.usersPresent = [];
+                        members.forEach(user => {
+                            this.usersPresent.push(user.email);
+                        })
+                        this.remainingUsers = this.allUsers.filter(x => !this.usersPresent.includes(x));
+                    }).catch((error) => {
+                        console.log(error);
                     })
-                    this.remainingUsers = this.allUsers.filter(x => !this.usersPresent.includes(x));
-                }).catch((error) => {
-                    console.log(error);
-                })
+
+            }else if(this.title === 'Attendees'){
+
+                const email = document.getElementById(this.eventId).value;
+                const meetingId = this.eventId;
+                
+                addUserToMeeting(email,meetingId)
+                    .then((response) => {
+                        console.log(response);
+                        const attendees = response.data.attendees;
+                        this.usersPresent = [];
+                        attendees.forEach(user => {
+                            this.usersPresent.push(user.email);
+                        })
+                        this.remainingUsers = this.allUsers.filter(x => !this.usersPresent.includes(x));
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+            }
         }
     }
 }

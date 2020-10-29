@@ -13,6 +13,7 @@
                 <b-button @click="excuseFromMeeting(meeting._id)" variant="danger">Excuse Yourself</b-button>
                 <hr>
                 <AddUser
+                    :title="title"
                     :eventId = "meeting._id"
                     :users = "meeting.attendees"
                     :allUsers = "allUsers"
@@ -35,6 +36,7 @@ export default {
     },
     data(){
         return{
+            title:"Attendees",
             users:[],
             allUsers:[]
         }

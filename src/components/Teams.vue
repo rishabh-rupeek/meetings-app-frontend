@@ -1,16 +1,12 @@
 <template>
-    <div>
+    <div class="text-left container">
         Teams
         <TeamsList
+            class="row"
             :teams="teams"
         />
     </div>
 </template>
-<script>
-export default {
-    
-}
-</script>
 <script>
 import { getTeamsForUser } from '../services.js/teams'
 import TeamsList from './TeamsList'
