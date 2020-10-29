@@ -41,3 +41,15 @@ export const dropFromTeam = (teamId) => {
         console.log(error);
     })
 }
+
+export const addTeam = (body) => {
+    return axios.post('http://localhost:3000/api/teams',body,{
+        headers: {
+            'Authorization': localStorage.getItem( 'token' )
+        }
+    }).then((response) => {
+        return response
+    }).catch((error) => {
+        console.log(error);
+    })
+}

@@ -5,16 +5,19 @@
             class="row"
             :teams="teams"
         />
+        <AddTeam/>
     </div>
 </template>
 <script>
 import { getTeamsForUser } from '../services.js/teams'
 import TeamsList from './TeamsList'
+import AddTeam from './AddTeam'
 
 export default {
     name: 'Teams',
     components:{
-        TeamsList
+        TeamsList,
+        AddTeam
     },
     data(){
         return{
