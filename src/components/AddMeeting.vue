@@ -67,15 +67,16 @@ export default {
                 description:this.desc,
                 date:this.meetingDate,
                 startTime:{
-                    hours:this.startTimeHours,
-                    minutes:this.startTimeMinutes
+                    hours:parseInt(this.startTimeHours),
+                    minutes:parseInt(this.startTimeMinutes)
                 },
                 endTime:{
-                    hours:this.endTimeHours,
-                    minutes:this.endTimeMinutes
+                    hours:parseInt(this.endTimeHours),
+                    minutes:parseInt(this.endTimeMinutes)
                 },
                 attendees: this.attendees.split(',')
             }
+            body.attendees.push(localStorage.getItem('email'));
             console.log(body);
             addMeeting(body)
                 .then((response) => {
