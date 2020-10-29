@@ -12,7 +12,7 @@
                 <br>
                 {{team.description}}
             </b-card-text>
-            <b-button>Drop from team</b-button>
+            <b-button @click="excuseFromTeam(team._id)">Drop from team</b-button>
             <hr>
             <AddUser
                 :title = "title"
@@ -26,6 +26,7 @@
 <script>
 import AddUser from './AddUser'
 import { getUsers } from '../services.js/users'
+import { dropFromTeam } from '../services.js/teams'
 
 export default {
     data(){
@@ -49,6 +50,16 @@ export default {
         }).catch((err)=>{
             console.log(err);
         })
+    },
+    methods:{
+        excuseFromTeam(teamId){
+            dropFromTeam(teamId)
+                .then((response)=>{
+                    console.log(response);
+                }).catch((err)=>{
+                    console.log(err);
+                })
+        }
     }
 }
 </script>

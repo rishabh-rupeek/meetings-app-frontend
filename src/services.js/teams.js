@@ -25,3 +25,19 @@ export const addUserToTeam = (email,teamId) => {
         console.log(error);
     })
 }
+
+export const dropFromTeam = (teamId) => {
+    console.log(teamId);
+    console.log(localStorage.getItem( 'token' ));
+    return axios.patch(`http://localhost:3000/api/teams/${teamId}/drop`,{
+        
+    },{
+        headers: {
+            'Authorization': localStorage.getItem( 'token' )
+        }
+    }).then((response) => {
+        return response
+    }).catch((error) => {
+        console.log(error);
+    })
+}
