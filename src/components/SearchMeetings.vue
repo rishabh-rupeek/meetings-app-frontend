@@ -44,6 +44,7 @@ export default {
     },
     methods:{
         search(){
+            console.log('searching');
             searchMeetingsForUser(this.dateOption,this.searchText)
                 .then((response) => {
                     //console.log(response);

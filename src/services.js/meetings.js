@@ -23,3 +23,17 @@ export const addMeeting = (body) => {
         console.log(error);
     })
 }
+
+export const addUserToMeeting = (email,meetingId) => {
+    return axios.patch(`http://localhost:3000/api/meetings/${meetingId}/addAttendee`,{
+        email:email
+    },{
+        headers: {
+            'Authorization': localStorage.getItem( 'token' )
+        }
+    }).then((response) => {
+        return response
+    }).catch((error) => {
+        console.log(error);
+    })
+}

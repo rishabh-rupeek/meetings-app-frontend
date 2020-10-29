@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="text-left">
         Meetings
         <div>
         <b-tabs content-class="mt-3">
