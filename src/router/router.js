@@ -25,6 +25,11 @@ export default new Router({
             name: 'teams',
             path: "/teams",
             component: () => import( '@/components/Teams' )
+        },
+        {
+            name: 'profile',
+            path: "/profile",
+            component: () => import( '@/components/Profile' )
         }
     ]
 });
