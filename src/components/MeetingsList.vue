@@ -26,6 +26,7 @@
 import AddUser from './AddUser'
 import { getUsers } from '../services.js/users'
 import { dropFromMeeting } from '../services.js/meetings'
+import { sendNotification } from '../services.js/utils'
 
 export default {
     components:{
@@ -54,6 +55,7 @@ export default {
             dropFromMeeting(meetingId)
                 .then((response) => {
                     console.log(response);
+                    sendNotification(`Dropped from meeting!`,"error");
                     this.$emit('meeting-dropped');
                 }).catch((err) => {
                     console.log(err);

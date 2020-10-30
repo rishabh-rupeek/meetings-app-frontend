@@ -27,6 +27,7 @@
 import AddUser from './AddUser'
 import { getUsers } from '../services.js/users'
 import { dropFromTeam } from '../services.js/teams'
+import { sendNotification } from '../services.js/utils'
 
 export default {
     data(){
@@ -56,6 +57,7 @@ export default {
             dropFromTeam(teamId)
                 .then((response)=>{
                     console.log(response);
+                    sendNotification(`Team left`,"default");
                     this.$emit('team-dropped');
                 }).catch((err)=>{
                     console.log(err);

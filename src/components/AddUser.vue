@@ -23,6 +23,7 @@
 <script>
 import { addUserToMeeting } from '../services.js/meetings'
 import { addUserToTeam } from '../services.js/teams'
+import { sendNotification } from '../services.js/utils'
 
 export default {
     name:'AddUser',
@@ -62,7 +63,8 @@ export default {
                 const teamId = this.eventId;
                 addUserToTeam(email,teamId)
                     .then((response) => {
-                        console.log(response);
+                        //console.log(response);
+                        sendNotification(`${email} added to team!`,"default");
                         const members = response.data.members;
                         this.usersPresent = [];
                         members.forEach(user => {
@@ -80,7 +82,8 @@ export default {
                 
                 addUserToMeeting(email,meetingId)
                     .then((response) => {
-                        console.log(response);
+                        //console.log(response);
+                        sendNotification(`${email} added to meeting!`,"default");
                         const attendees = response.data.attendees;
                         this.usersPresent = [];
                         attendees.forEach(user => {

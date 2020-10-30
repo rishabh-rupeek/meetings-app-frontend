@@ -35,6 +35,7 @@
 </template>
 <script>
 import { addTeam } from '../services.js/teams'
+import { sendNotification } from '../services.js/utils'
 
 export default {
     name:'AddTeam',
@@ -59,6 +60,7 @@ export default {
             addTeam(body)
                 .then((response) => {
                     console.log(response);
+                    sendNotification(`${body.name} team created!`,"success");
                     this.$emit('team-added');    
                 }).catch((error) => {
                     console.log(error);

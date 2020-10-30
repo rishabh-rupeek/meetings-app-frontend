@@ -45,6 +45,7 @@
 </template>
 <script>
 import { addMeeting } from '../services.js/meetings'
+import { sendNotification } from '../services.js/utils'
 
 export default {
     name:'AddMeeting',
@@ -77,10 +78,11 @@ export default {
                 attendees: this.attendees.split(',')
             }
             body.attendees.push(localStorage.getItem('email'));
-            console.log(body);
+            //console.log(body);
             addMeeting(body)
                 .then((response) => {
                     console.log(response);
+                    sendNotification(`Meeting scheduled on ${response.data.date.substr(0,10)}`,"success");
                 }).catch((error) => {
                     console.log(error);
                 })
