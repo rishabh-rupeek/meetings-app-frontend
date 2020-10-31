@@ -14,22 +14,6 @@
         >
         </b-form-input>
         </b-form-group>
-
-        <b-form-group
-            id="fieldset-horizontal"
-            label-cols-sm="4"
-            label-cols-lg="3"
-            description="Let us know your email."
-            label="Enter your email"
-            label-for="input-horizontal"
-        >
-        <b-form-input 
-            v-model="email" 
-            type="email" 
-            id="input-horizontal">
-        </b-form-input>
-        </b-form-group>
-
         <b-form-group
             id="fieldset-horizontal"
             label-cols-sm="4"
@@ -55,7 +39,6 @@ export default {
     data(){
         return{
             name:localStorage.getItem('name'),
-            email:localStorage.getItem('email'),
             image:null
         }
     },
@@ -71,10 +54,8 @@ export default {
             const formData = new FormData();
             formData.append('image', this.image);
             formData.append('name', this.name);
-            formData.append('email',this.email);
-            // console.log(formData.get('name'));
-            // console.log(formData.get('email'));
-            // console.log(formData.get('image'));
+            console.log(formData.get('name'));
+            console.log(formData.get('image'));
             upload(formData)
                 .then(() => {
                     sendNotification("Profile Updated","success");
