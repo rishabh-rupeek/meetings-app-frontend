@@ -9,11 +9,7 @@
         />
     </div>
 </template>
-<script>
-export default {
-    
-}
-</script>
+
 <script>
 import { getMeetingsForUser } from '../services.js/calendar'
 import MeetingsList from './MeetingsList'

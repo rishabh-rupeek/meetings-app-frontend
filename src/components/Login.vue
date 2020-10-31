@@ -18,6 +18,8 @@
 </template>
 <script>
 import { loginWithCredentials } from '../services.js/auth'
+import { sendNotification } from '../services.js/utils';
+import { getProfilePicture } from '../services.js/utils';
 export default {
     name : 'Login',
     data() {
@@ -36,10 +38,19 @@ export default {
                     localStorage.setItem('name',response.data.name);
                     localStorage.setItem('email',response.data.email);
                     localStorage.setItem('userId',response.data.userId);
-                    localStorage.setItem('profileImage',response.data.email+'jpg')
+                    getProfilePicture(response.data.email)
+                        .then((response) => {
+                            localStorage.setItem("imgData", response);
+                            //console.log(response + 'Fetched Image');
+                        }).catch((err) => {
+                            console.log(err);
+                        })
+                    this.$emit('user-logged');
+                    //localStorage.setItem('profileImage',response.data.email+'jpg')
                     this.$router.push(this.$route.query.redirect || '/calendar');
                 }).catch((error)=>{
                     console.log(error);
+                    sendNotification("Incorrect Username or Password", "error");
                 })
         }
     }    

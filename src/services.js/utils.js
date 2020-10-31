@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import axios from 'axios';
 import VueToast from 'vue-toast-notification';
 // Import one of available themes
 import 'vue-toast-notification/dist/theme-default.css';
@@ -13,5 +14,16 @@ export function sendNotification (message,type) {
         type: type,
         duration: 4000,
         dismissible: true
+    })
+}
+
+export function getProfilePicture(email) {
+    return axios
+    .get(`http://localhost:3000/profile-images/${email}.jpg`, {
+      responseType: 'arraybuffer'
+    })
+    .then(response => Buffer.from(response.data, 'binary').toString('base64'))
+    .catch((err) => {
+        console.log(err);
     })
 }

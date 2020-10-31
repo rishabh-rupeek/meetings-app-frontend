@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Navbar
+      :isAuth="isAuth"
+      v-on:user-logout="userLoggedOut"
+    />
     <div class="container my-4">
-      <router-view></router-view>
+      <router-view v-on:user-logged="userLoggedIn"></router-view>
     </div>
   </div>
 </template>
@@ -14,6 +17,25 @@ export default {
   name: 'App',
   components: {
     Navbar
+  },
+  data(){
+    return{
+      isAuth:false
+    }
+  },
+  mounted(){
+    console.log('haha');
+    console.log(localStorage.getItem('token'));
+  },
+  methods: {
+    userLoggedIn(){
+      console.log('Login ho gya');
+      this.isAuth = true;
+    },
+    userLoggedOut(){
+      console.log('Logout ho gya');
+      this.isAuth = false;
+    }
   }
 }
 </script>
