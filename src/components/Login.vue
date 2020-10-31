@@ -4,14 +4,34 @@
         @submit="submitForm"
     >
         Login Form
-        <div class="form-group">
-            <label for="email">Email adress</label>
-            <input v-model="email" type="email" class="form-control" id="email" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
-        </div>
+        <b-form-group
+            id="fieldset-horizontal"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            label="Enter your email"
+            label-for="input-horizontal"
+        >
+        <b-form-input 
+            v-model="email" 
+            type="email"
+            id="email input-horizontal"
+        >
+        </b-form-input>
+        </b-form-group>
+        <b-form-group
+            id="fieldset-horizontal"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            label="Enter your Password"
+            label-for="input-horizontal"
+        >
+        <b-form-input 
+            v-model="password" 
+            type="password"
+            id="password input-horizontal"
+        >
+        </b-form-input>
+        </b-form-group>
         <input type="submit" value="submit" class="btn btn-primary">
     </form>
     </div>
@@ -41,13 +61,14 @@ export default {
                     getProfilePicture(response.data.email)
                         .then((response) => {
                             localStorage.setItem("imgData", response);
+                            this.$emit('user-logged');
+                            this.$router.push(this.$route.query.redirect || '/calendar');
                             //console.log(response + 'Fetched Image');
                         }).catch((err) => {
                             console.log(err);
                         })
-                    this.$emit('user-logged');
+                    
                     //localStorage.setItem('profileImage',response.data.email+'jpg')
-                    this.$router.push(this.$route.query.redirect || '/calendar');
                 }).catch((error)=>{
                     console.log(error);
                     sendNotification("Incorrect Username or Password", "error");

@@ -25,6 +25,9 @@ export const addMeeting = (body) => {
 }
 
 export const addUserToMeeting = (email,meetingId) => {
+    console.log(email);
+    console.log(meetingId);
+    console.log(localStorage.getItem('token'));
     return axios.patch(`http://localhost:3000/api/meetings/${meetingId}/addAttendee`,{
         email:email
     },{

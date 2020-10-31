@@ -82,7 +82,7 @@ export default {
                 
                 addUserToMeeting(email,meetingId)
                     .then((response) => {
-                        //console.log(response);
+                        console.log(response);
                         sendNotification(`${email} added to meeting!`,"default");
                         const attendees = response.data.attendees;
                         this.usersPresent = [];
