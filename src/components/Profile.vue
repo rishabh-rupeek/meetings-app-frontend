@@ -1,7 +1,7 @@
 <template>
     <form v-on:submit.prevent="uploadData" enctype="multipart/form-data">
         <b-form-group
-            id="fieldset-horizontal"
+            class="fieldset-horizontal"
             label-cols-sm="4"
             label-cols-lg="3"
             description="Let us know your name."
@@ -10,12 +10,12 @@
         >
         <b-form-input 
             v-model="name" 
-            id="input-horizontal"
+            class="input-horizontal"
         >
         </b-form-input>
         </b-form-group>
         <b-form-group
-            id="fieldset-horizontal"
+            class="fieldset-horizontal"
             label-cols-sm="4"
             label-cols-lg="3"
             label="Choose new Profile picture"
@@ -26,20 +26,52 @@
             id="image"  
             name="image" />
         </b-form-group> 
-        <div class="mt-3">Selected file: {{ this.image ? this.image.name : '' }}</div>
+        <b-form-group
+            class="fieldset-horizontal"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            description="Old Password"
+            label="Enter your old password"
+            label-for="input-horizontal"
+        >
+        <b-form-input 
+            v-model="oldPassword" 
+            type="password"
+            class="input-horizontal"
+        >
+        </b-form-input>
+        </b-form-group>
+
+        <b-form-group
+            class="fieldset-horizontal"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            description="New Password"
+            label="Enter your new password"
+            label-for="input-horizontal"
+        >
+        <b-form-input 
+            v-model="newPassword" 
+            type="password"
+            class="input-horizontal"
+        >
+        </b-form-input>
+        </b-form-group>
+
         <input type="submit" name="btn_upload_profile_pic" value="Update Profile" /> 
 </form>
 </template>
 <script>
 import { upload } from '../services.js/upload'
-import { sendNotification } from '../services.js/utils'
 
 export default {
     name:'Profile',
     data(){
         return{
             name:localStorage.getItem('name'),
-            image:null
+            image:null,
+            oldPassword:"",
+            newPassword:"",
         }
     },
     methods:{
@@ -54,11 +86,12 @@ export default {
             const formData = new FormData();
             formData.append('image', this.image);
             formData.append('name', this.name);
-            console.log(formData.get('name'));
-            console.log(formData.get('image'));
+            formData.append('oldPassword',this.oldPassword);
+            formData.append('newPassword',this.newPassword);
+    
             upload(formData)
-                .then(() => {
-                    sendNotification("Profile Updated","success");
+                .then((result) => {
+                    console.log(result);
                 }).catch((err) => {
                     console.log(err);
                 })
