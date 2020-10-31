@@ -1,20 +1,61 @@
 <template>
     <form v-on:submit.prevent="uploadData" enctype="multipart/form-data">
-    <div> 
-       <label>Select your profile picture:</label> <input v-on:change="onFileChange" type="file" id="image"  name="image" />
-    </div>
-    <div> 
-        <input type="submit" name="btn_upload_profile_pic" value="Upload" /> 
-    </div>
+        <b-form-group
+            id="fieldset-horizontal"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            description="Let us know your name."
+            label="Enter your name"
+            label-for="input-horizontal"
+        >
+        <b-form-input 
+            v-model="name" 
+            id="input-horizontal"
+        >
+        </b-form-input>
+        </b-form-group>
+
+        <b-form-group
+            id="fieldset-horizontal"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            description="Let us know your email."
+            label="Enter your email"
+            label-for="input-horizontal"
+        >
+        <b-form-input 
+            v-model="email" 
+            type="email" 
+            id="input-horizontal">
+        </b-form-input>
+        </b-form-group>
+
+        <b-form-group
+            id="fieldset-horizontal"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            label="Choose new Profile picture"
+            label-for="input-horizontal"
+        >
+        <b-form-file v-on:change="onFileChange" 
+            drop-placeholder="Drop file here..." 
+            id="image"  
+            name="image" />
+        </b-form-group> 
+        <div class="mt-3">Selected file: {{ this.image ? this.image.name : '' }}</div>
+        <input type="submit" name="btn_upload_profile_pic" value="Update Profile" /> 
 </form>
 </template>
 <script>
-import axios from 'axios'
+import { upload } from '../services.js/upload'
+import { sendNotification } from '../services.js/utils'
 
 export default {
     name:'Profile',
     data(){
         return{
+            name:localStorage.getItem('name'),
+            email:localStorage.getItem('email'),
             image:null
         }
     },
@@ -29,13 +70,14 @@ export default {
         uploadData(){
             const formData = new FormData();
             formData.append('image', this.image);
-            axios.post(`http://localhost:3000/api/upload?email=${localStorage.getItem('email')}`,formData,{
-                headers: {
-                    'Authorization': localStorage.getItem( 'token' )
-                }
-                })
-                .then((result) => {
-                    console.log(result);
+            formData.append('name', this.name);
+            formData.append('email',this.email);
+            // console.log(formData.get('name'));
+            // console.log(formData.get('email'));
+            // console.log(formData.get('image'));
+            upload(formData)
+                .then(() => {
+                    sendNotification("Profile Updated","success");
                 }).catch((err) => {
                     console.log(err);
                 })
