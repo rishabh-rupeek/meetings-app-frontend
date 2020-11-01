@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { isAuthenticated } from '../services.js/utils'
 
 Vue.use( Router );
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     routes: [
         {
@@ -33,3 +34,10 @@ export default new Router({
         }
     ]
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.name !== 'login' && !isAuthenticated()) next({ name: 'login' })
+    else next()
+  })
+
+export default router;
