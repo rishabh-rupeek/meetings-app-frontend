@@ -144,6 +144,7 @@ export default {
                 email:this.register_email,
                 password:this.register_password
             }
+            console.log(body);
             registerWithCredentials(body)
                 .then((response) => {
                     console.log(response);

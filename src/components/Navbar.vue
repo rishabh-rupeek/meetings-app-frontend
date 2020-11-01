@@ -12,7 +12,7 @@
             </li>
         </ul>
         <div class="float-right">
-        <ProfileIcon v-on:user-logout="userLoggedOut"/>
+        <ProfileIcon v-on:user-logout="userLoggedOut" :testProp = "trigger"/>
         </div>
     </nav>
 </template>
@@ -25,7 +25,8 @@ export default {
         ProfileIcon
     },
     props:{
-        isAuth:Boolean
+        isAuth:Boolean,
+        trigger:Boolean
     },
     methods:{
         userLoggedOut(){

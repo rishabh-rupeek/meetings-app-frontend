@@ -2,10 +2,11 @@
   <div id="app">
     <Navbar
       :isAuth="isAuth"
+      :trigger="trigger"
       v-on:user-logout="userLoggedOut"
     />
     <div class="container my-4">
-      <router-view v-on:user-logged="userLoggedIn"></router-view>
+      <router-view v-on:user-logged="userLoggedIn" v-on:profile-updated="profileUpdated"></router-view>
     </div>
   </div>
 </template>
@@ -20,7 +21,8 @@ export default {
   },
   data(){
     return{
-      isAuth:false
+      isAuth:false,
+      trigger:true
     }
   },
   mounted(){
@@ -35,6 +37,10 @@ export default {
     userLoggedOut(){
       console.log('Logout ho gya');
       this.isAuth = false;
+    },
+    profileUpdated(){
+      console.log('profile update')
+      this.trigger = !this.trigger;
     }
   }
 }

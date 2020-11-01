@@ -90,8 +90,8 @@ export default {
             formData.append('newPassword',this.newPassword);
     
             upload(formData)
-                .then((result) => {
-                    console.log(result);
+                .then(() => {
+                    this.$emit('profile-updated');
                 }).catch((err) => {
                     console.log(err);
                 })
