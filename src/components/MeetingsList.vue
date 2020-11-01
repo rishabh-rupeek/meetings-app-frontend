@@ -1,5 +1,8 @@
 <template>
     <div id="meetingsList">
+        <div v-if="this.meetings.length == 0">
+            No available meetings for the matching criteria
+        </div>
         <b-list-group class="container-fluid text-left">
             <b-list-group-item
                 v-for="(meeting,index) in meetings" 

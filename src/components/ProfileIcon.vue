@@ -48,6 +48,7 @@ export default {
 #profileImage{
     width: 50px;
     height: 30px;
-    border-radius: 5%;
+    vertical-align: middle;
+    border-radius: 50%;
 }
 </style>

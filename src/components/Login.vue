@@ -5,7 +5,6 @@
                 <form
                     @submit="submitForm"
                 >
-                    Login 
                     <b-form-group
                         id="fieldset-horizontal"
                         label-cols-sm="4"

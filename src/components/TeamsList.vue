@@ -1,5 +1,8 @@
 <template>
     <div id="teamsList">
+        <div v-if="this.teams.length == 0">
+            No available teams
+        </div>
         <b-card class="col-sm-4"
             style="margin:1em"
             v-for="(team,index) in teams" 
@@ -12,7 +15,7 @@
                 <br>
                 {{team.description}}
             </b-card-text>
-            <b-button @click="excuseFromTeam(team._id)">Drop from team</b-button>
+            <b-button @click="excuseFromTeam(team._id)" variant="danger">Drop from team</b-button>
             <hr>
             <AddUser
                 :title = "title"

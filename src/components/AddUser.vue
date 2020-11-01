@@ -4,6 +4,7 @@
         <span
             v-for="(user,user_index) in usersPresent"
             :key="user_index"
+            class="badge badge-light"
         >
         {{user}}
         </span>
@@ -17,7 +18,7 @@
             {{user}}
             </option>
         </select>
-        <b-button @click="addUser" variant="primary">Add</b-button>
+        <b-button @click="addUser" class="btn btn-success">Add</b-button>
     </div>
 </template>
 <script>
@@ -64,7 +65,7 @@ export default {
                 addUserToTeam(email,teamId)
                     .then((response) => {
                         //console.log(response);
-                        sendNotification(`${email} added to team!`,"default");
+                        sendNotification(`${email} added to team!`,"success");
                         const members = response.data.members;
                         this.usersPresent = [];
                         members.forEach(user => {
@@ -83,7 +84,7 @@ export default {
                 addUserToMeeting(email,meetingId)
                     .then((response) => {
                         console.log(response);
-                        sendNotification(`${email} added to meeting!`,"default");
+                        sendNotification(`${email} added to meeting!`,"success");
                         const attendees = response.data.attendees;
                         this.usersPresent = [];
                         attendees.forEach(user => {

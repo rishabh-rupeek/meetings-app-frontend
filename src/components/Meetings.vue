@@ -1,6 +1,5 @@
 <template>
     <div class="text-left">
-        Meetings
         <div>
         <b-tabs content-class="mt-3">
             <b-tab title="Filter/Search Meetings" active>

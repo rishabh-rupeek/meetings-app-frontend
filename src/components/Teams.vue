@@ -1,6 +1,5 @@
 <template>
     <div class="text-left container">
-        Teams
         <div>
         <b-tabs content-class="mt-3">
             <b-tab title="View Teams" active>

@@ -1,45 +1,56 @@
 <template>
     <div>
-        Add a Meeting
         <div>
-            <div>
+            <div class="input_section">
+                <label>
                 Meeting Name:
-                <input type="text" v-model="name">
+                </label>
+                <input class="form-control" type="text" v-model="name">
             </div>
-            <div>
+            <div class="input_section">
                 <label for="meetingDate">Date:</label>
-                <input type="date" v-model="meetingDate" id="meetingDate" name="meetingDate">
+                <input type="date" v-model="meetingDate" class="form-control" id="meetingDate" name="meetingDate">
             </div>
-            <div>
+            <div class="input_section">
+                <label>
                 Start Time (hh:mm)
+                </label>
                 <input id="start-time-hours" v-model="startTimeHours" type="number" value="0" min="0" max="23">
                 <input id="start-time-minutes" v-model="startTimeMinutes" type="number" value="0" min="0" max="59">
             </div>
-            <div>
+            <div class="input_section">
+                <label>
                 End Time (hh:mm)
+                </label>
                 <input id="end-time-hours" v-model="endTimeHours" type="number" value="0" min="0" max="23">
                 <input id="end-time-minutes" v-model="endTimeMinutes" type="number" value="0" min="0" max="59">
             </div>
-            <div>
-                Description
+            <div class="input_section">
+                <label>
+                Description:
+                </label>
                 <b-form-textarea
                 id="textarea"
+                class="form-control"
                 v-model="desc"
                 placeholder="What is the agenda for the meeting?"
                 rows="3"
                 max-rows="6"
             ></b-form-textarea>    
             </div>
-            <div>
+            <div class="input_section">
+                <label>
                 Email id's of the Attendees Or Team's short names:
+                </label>
                 <input type="text"
                 id="textarea"
                 v-model="attendees"
+                class="form-control"
                 placeholder="john@example.com,@tech-team"
                 size="100"
                 >    
             </div>
-            <button @click="add">Add Meeting</button>
+            <button @click="add" class="btn btn-primary">Add Meeting</button>
         </div>
     </div>
 </template>
@@ -90,3 +101,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.input_section{
+    margin-bottom: 20px;
+}
+</style>

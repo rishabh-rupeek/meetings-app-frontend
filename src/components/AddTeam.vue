@@ -1,35 +1,44 @@
 <template>
     <div>
-        Create a new Team
         <div>
-            <div>
+            <div class="input_section">
+                <label>
                 Name:
-                <input type="text" v-model="name">
+                </label>
+                <input type="text" class="form-control" v-model="name">
             </div>
-            <div>
+            <div class="input_section">
+                <label>
                 Short Name:
-                <input type="text" v-model="shortName">
+                </label>
+                <input type="text" class="form-control" v-model="shortName">
             </div>
-            <div>
-                Description
+            <div class="input_section">
+                <label>
+                Description:
+                </label>
                 <b-form-textarea
                 id="textarea"
                 v-model="desc"
+                class="form-control"
                 placeholder="What is the agenda of the team?"
                 rows="3"
                 max-rows="6"
             ></b-form-textarea>    
             </div>
-            <div>
+            <div class="input_section">
+                <label>
                 Email id's of the Team members:
+                </label>
                 <input type="text"
                 id="textarea"
                 v-model="members"
+                class="form-control"
                 placeholder="john@example.com,jane@example.com"
                 size="100"
                 >    
             </div>
-            <button @click="add">Add Team</button>
+            <button @click="add" class="btn btn-primary">Add Team</button>
         </div>
     </div>
 </template>
@@ -70,3 +79,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.input_section{
+    margin-bottom: 20px;
+}
+</style>
