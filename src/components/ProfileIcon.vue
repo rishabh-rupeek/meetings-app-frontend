@@ -28,7 +28,7 @@ export default {
             this.isAuth = false;
         }else{
             var bannerImg = document.getElementById('profileImage');
-            bannerImg.src = "data:image/png;base64," + dataImage;
+            bannerImg.src = "data:image/jpg;base64," + dataImage;
         }
     },
     methods:{

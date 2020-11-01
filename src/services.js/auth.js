@@ -10,3 +10,12 @@ export const loginWithCredentials = (email,password) => {
         console.log(error);
     })
 }
+
+export const registerWithCredentials = (body) => {
+    return axios.post('http://localhost:3000/api/auth/register',body)
+    .then((response) => {
+        return response
+    }).catch((error) => {
+        console.log(error);
+    })
+}

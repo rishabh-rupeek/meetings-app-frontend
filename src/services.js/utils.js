@@ -24,6 +24,16 @@ export function getProfilePicture(email) {
     })
     .then(response => Buffer.from(response.data, 'binary').toString('base64'))
     .catch((err) => {
-        console.log(err);
+        console.log(err+'ni');
     })
+}
+
+export function  getDefaultPicture() {
+    return axios.get('http://localhost:3000/profile-images/default.jpg', {
+        responseType: 'arraybuffer'
+        })
+        .then(response => Buffer.from(response.data,'binary').toString('base64'))
+        .catch((error)=>{
+            console.log(error + 'Default image missing');
+        })
 }
