@@ -53,7 +53,7 @@ export default {
             console.log('searching');
             searchMeetingsForUser(this.dateOption,this.searchText)
                 .then((response) => {
-                    //console.log(response);
+                    console.log(response);
                     this.meetingsList = response.data;
                 }).catch((error) => {
                     console.log(error);

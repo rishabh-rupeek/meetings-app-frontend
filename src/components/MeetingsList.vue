@@ -13,6 +13,8 @@
                 <br>
                 {{meeting.name}}
                 <br>
+                {{meeting.description}}
+                <br>
                 <b-button @click="excuseFromMeeting(meeting._id)" variant="danger">Excuse Yourself</b-button>
                 <hr>
                 <AddUser

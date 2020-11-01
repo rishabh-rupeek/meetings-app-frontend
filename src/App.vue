@@ -1,9 +1,40 @@
 <template>
   <div id="app">
+    <div v-if="!isAuth" id="left-section">
+        <h1>
+          Meetings App
+        </h1>
+        <div>
+          Manage all your meetings
+          in one app.
+        </div>
+        <br>
+        <div class="text-left" style="margin:20px">
+          <h4>Features: </h4>
+          <ul>
+            <li>
+              View All meetings
+            </li>
+            <li>
+              Filter meetings 
+            </li>
+            <li>
+              Create meetings
+            </li>
+            <li>
+              Create teams
+            </li>
+            <li>
+              Add teams to meetings
+            </li>
+          </ul>
+        </div>
+    </div>
     <Navbar
       :isAuth="isAuth"
       :trigger="trigger"
       v-on:user-logout="userLoggedOut"
+      v-on:logged-in="userLoggedIn"
     />
     <div class="container my-4">
       <router-view v-on:user-logged="userLoggedIn" v-on:profile-updated="profileUpdated"></router-view>
@@ -53,5 +84,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+#left-section{
+    top:0px;
+    width: 45%;
+    height: 800px;
+    /* display: inline; */
+    float: left;
 }
 </style>

@@ -19,6 +19,7 @@
 
 <script>
 import ProfileIcon from './ProfileIcon'
+import { isAuthenticated } from '../services.js/utils'
 export default {
     name: 'Navbar',
     components:{
@@ -31,6 +32,12 @@ export default {
     methods:{
         userLoggedOut(){
             this.$emit('user-logout');
+        }
+    },
+    mounted(){
+        if(isAuthenticated()){
+            this.isAuth = true;
+            this.$emit('logged-in');
         }
     }
 }

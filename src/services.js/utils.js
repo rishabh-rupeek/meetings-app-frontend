@@ -37,3 +37,7 @@ export function  getDefaultPicture() {
             console.log(error + 'Default image missing');
         })
 }
+
+export function isAuthenticated() {
+    return !!localStorage.getItem('token');
+}
