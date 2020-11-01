@@ -45,6 +45,7 @@
 <script>
 import { addTeam } from '../services.js/teams'
 import { sendNotification } from '../services.js/utils'
+import { addNotification } from '../services.js/notifications'
 
 export default {
     name:'AddTeam',
@@ -69,8 +70,18 @@ export default {
             addTeam(body)
                 .then((response) => {
                     console.log(response);
-                    sendNotification(`${body.name} team created!`,"success");
-                    this.$emit('team-added');    
+                    const notification = {
+                        email:localStorage.getItem('email'),
+                        date:new Date(),
+                        message:`You created ${body.name} team`
+                    }
+                    addNotification(notification)
+                        .then(() => {
+                            sendNotification(`${body.name} team created!`,"success");
+                            this.$emit('team-added');  
+                        }).catch((error) => {
+                            console.log(error);
+                        })  
                 }).catch((error) => {
                     console.log(error);
                 })

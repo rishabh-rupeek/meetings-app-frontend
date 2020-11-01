@@ -1,8 +1,8 @@
 <template>
     <div>
-        <b-dropdown id="dropdown-dropleft" dropleft text="Hey" class="m-md-2">
-            <span slot="button-content">
-                Hey
+        <b-dropdown id="dropdown-1" text="Hey" class="profileIcon" :no-caret=true>
+            <span class="profileIcon" slot="button-content">
+                Hey {{ name }}
                 <img class="img-fluid p-2" src="" id="profileImage" />
             </span>
             <b-dropdown-item>
@@ -62,9 +62,9 @@ export default {
 </script>
 <style scoped>
 #profileImage{
-    width: 50px;
-    height: 30px;
-    vertical-align: middle;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
+
 </style>

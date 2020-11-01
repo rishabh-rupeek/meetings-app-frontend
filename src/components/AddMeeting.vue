@@ -57,6 +57,7 @@
 <script>
 import { addMeeting } from '../services.js/meetings'
 import { sendNotification } from '../services.js/utils'
+import { addNotification } from '../services.js/notifications'
 
 export default {
     name:'AddMeeting',
@@ -93,7 +94,17 @@ export default {
             addMeeting(body)
                 .then((response) => {
                     console.log(response);
-                    sendNotification(`Meeting scheduled on ${response.data.date.substr(0,10)}`,"success");
+                    const notification = {
+                        email:localStorage.getItem('email'),
+                        date:new Date(),
+                        message:`You created ${body.name} meeting`
+                    }
+                    addNotification(notification)
+                        .then(() => {
+                            sendNotification(`Meeting scheduled on ${response.data.date.substr(0,10)}`,"success");
+                        }).catch((error) => {
+                            console.log(error);
+                        })  
                 }).catch((error) => {
                     console.log(error);
                 })
