@@ -37,6 +37,9 @@ export default {
                 .then((response) => {
                     //console.log(response);
                     this.meetings = response.data;
+                    this.meetings.sort(function(a,b){
+                        return new Date(a.date) - new Date(b.date);
+                    });
                 }).catch((error) => {
                     console.log(error);
                 })

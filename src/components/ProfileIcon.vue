@@ -38,6 +38,7 @@ export default {
     },
     methods:{
         setImg(){
+            this.name = localStorage.getItem('name');
             getProfilePicture(this.email)
                 .then((response) => {
                     console.log(response);

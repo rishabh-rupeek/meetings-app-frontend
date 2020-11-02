@@ -55,6 +55,9 @@ export default {
                 .then((response) => {
                     console.log(response);
                     this.meetingsList = response.data;
+                    this.meetingsList.sort(function(a,b){
+                        return new Date(a.date) - new Date(b.date);
+                    });
                 }).catch((error) => {
                     console.log(error);
                 })
