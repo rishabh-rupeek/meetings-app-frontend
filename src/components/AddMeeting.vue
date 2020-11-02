@@ -58,6 +58,7 @@
 import { addMeeting } from '../services.js/meetings'
 import { sendNotification } from '../services.js/utils'
 import { addNotification } from '../services.js/notifications'
+import { getMembersOfTeam } from '../services.js/teams'
 
 export default {
     name:'AddMeeting',
@@ -81,7 +82,7 @@ export default {
         
     },
     methods:{
-        add(){
+        async add(){
             const body = {
                 name:this.name,
                 description:this.desc,
@@ -96,8 +97,27 @@ export default {
                 },
                 attendees: this.attendees.split(',')
             }
+            
+            const promisesToAwait = [];
+
+            for( let i=0; i<body.attendees.length; i++ ){
+                if(body.attendees[i][0] === '@'){
+                    promisesToAwait.push(getMembersOfTeam(body.attendees[i].substr(1)));
+                }
+            }
+            const teamMembers = [];
+            const teams = await Promise.all(promisesToAwait);
+            teams.forEach((team) => {
+                if(team !== undefined){
+                    teamMembers.push(...team.data);
+                }
+            })
+
             body.attendees.push(localStorage.getItem('email'));
-            //console.log(body);
+            body.attendees.push(...teamMembers);
+            body.attendees = body.attendees.filter(attendee => attendee[0]!=='@');
+            body.attendees = [... new Set(body.attendees)];
+            
             addMeeting(body)
                 .then((response) => {
                     console.log(response);

@@ -11,7 +11,7 @@
             <b-card-text>
                 <b>{{team.name}}</b>
                 <br>
-                {{team.shortName}}
+                @{{team.shortName}}
                 <br>
                 {{team.description}}
             </b-card-text>

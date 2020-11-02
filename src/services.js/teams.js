@@ -27,8 +27,6 @@ export const addUserToTeam = (email,teamId) => {
 }
 
 export const dropFromTeam = (teamId) => {
-    console.log(teamId);
-    console.log(localStorage.getItem( 'token' ));
     return axios.patch(`http://localhost:3000/api/teams/${teamId}/drop`,{
         
     },{
@@ -49,6 +47,18 @@ export const addTeam = (body) => {
         }
     }).then((response) => {
         return response
+    }).catch((error) => {
+        console.log(error);
+    })
+}
+
+export const getMembersOfTeam = (shortName) => {
+    return axios.get(`http://localhost:3000/api/teams/${shortName}`,{
+        headers: {
+            'Authorization': localStorage.getItem( 'token' )
+        }
+    }).then((response) => {
+        return response;
     }).catch((error) => {
         console.log(error);
     })
