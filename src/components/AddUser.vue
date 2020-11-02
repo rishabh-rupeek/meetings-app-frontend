@@ -18,7 +18,7 @@
             {{user}}
             </option>
         </select>
-        <b-button @click="addUser" class="btn btn-success">Add</b-button>
+        <b-button @click="addUser" class="btn btn-success ml-2">Add</b-button>
     </div>
 </template>
 <script>

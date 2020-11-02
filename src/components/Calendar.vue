@@ -1,9 +1,11 @@
 <template>
     <div>
-        <div class="float-right">
+        <div class="float-right d-block">
         <input type="date" v-model="selectedDate" v-on:input="getMeetings" id="datePicker">
         </div>
+        <br>
         <MeetingsList 
+            class="meetings"
             :meetings="meetings"
         />
     </div>
@@ -48,7 +50,7 @@ export default {
 </script>
 <style scoped>
 #datePicker{
-    margin: 30px;
+    margin: 1rem;
 }
 </style>
 <style>

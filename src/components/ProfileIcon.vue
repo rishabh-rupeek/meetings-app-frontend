@@ -6,7 +6,7 @@
                 <img class="img-fluid p-2" src="" id="profileImage" />
             </span>
             <b-dropdown-item>
-                <router-link class="nav-link" to="/profile" exact>Edit Profile</router-link>
+                <router-link to="/profile" exact>Edit Profile</router-link>
             </b-dropdown-item>
             <b-dropdown-item @click="logout">Logout</b-dropdown-item>
         </b-dropdown>

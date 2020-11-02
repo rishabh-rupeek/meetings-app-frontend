@@ -1,8 +1,8 @@
 <template>
     <div id="meetingsList">
-        <div v-if="this.meetings.length == 0">
+        <b-alert show variant="info" class="noMeetings" v-if="this.meetings.length == 0">
             No available meetings for the matching criteria
-        </div>
+        </b-alert>
         <b-list-group class="container-fluid text-left">
             <b-list-group-item
                 v-for="(meeting,index) in meetings" 
@@ -11,7 +11,7 @@
                 <b>{{formatDate(meeting.date)}}</b>
                 {{formatTime(meeting.startTime.hours)}}:{{formatTime(meeting.startTime.minutes)}} - {{formatTime(meeting.endTime.hours)}}:{{formatTime(meeting.endTime.minutes)}}
                 <br>
-                {{meeting.name}}
+                <b>{{meeting.name}}</b>
                 <br>
                 {{meeting.description}}
                 <br>
@@ -80,6 +80,9 @@ export default {
 }
 </script>
 <style scoped>
+.noMeetings{
+    margin: 3em;
+}
 .meetingsList{
     margin: 2em;
 }

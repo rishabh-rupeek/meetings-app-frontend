@@ -26,6 +26,8 @@
             ></b-form-textarea>
         </div>
         <button @click="search" class="btn btn-primary">Search</button>
+        <br>
+        <br>
         <MeetingsList 
             v-on:meeting-dropped="search"
             :meetings="meetingsList"
