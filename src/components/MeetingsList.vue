@@ -15,6 +15,7 @@
                 <br>
                 {{meeting.description}}
                 <br>
+                <div v-if="futureEvent(meeting.date)">
                 <b-button @click="excuseFromMeeting(meeting._id)" variant="danger">Excuse Yourself</b-button>
                 <hr>
                 <AddUser
@@ -23,6 +24,7 @@
                     :users = "meeting.attendees"
                     :allUsers = "allUsers"
                 />
+                </div>
                 </b-list-group-item>
             </b-list-group>
     </div>
@@ -44,7 +46,7 @@ export default {
         return{
             title:"Attendees",
             users:[],
-            allUsers:[]
+            allUsers:[],
         }
     },
     methods:{
@@ -65,7 +67,11 @@ export default {
                 }).catch((err) => {
                     console.log(err);
                 })
-        }   
+        },
+        futureEvent(givenDate) {
+            let currentDate = new Date().toISOString();
+            return givenDate.substr(0,10) >= currentDate.substr(0,10);
+        } 
     },
     mounted(){
         getUsers().then((response)=>{
