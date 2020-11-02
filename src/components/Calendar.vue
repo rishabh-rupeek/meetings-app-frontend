@@ -1,6 +1,5 @@
 <template>
     <div>
-        Hey {{name}}
         <div class="float-right">
         <input type="date" v-model="selectedDate" v-on:input="getMeetings" id="datePicker">
         </div>
@@ -48,7 +47,9 @@ export default {
 }
 </script>
 <style scoped>
-
+#datePicker{
+    margin: 30px;
+}
 </style>
 <style>
 </style>

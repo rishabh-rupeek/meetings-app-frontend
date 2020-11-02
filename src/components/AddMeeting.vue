@@ -9,21 +9,21 @@
             </div>
             <div class="input_section">
                 <label for="meetingDate">Date:</label>
-                <input type="date" v-model="meetingDate" class="form-control" id="meetingDate" name="meetingDate">
+                <b-form-datepicker :min="min" v-model="meetingDate" id="meetingDate" name="meetingDate"></b-form-datepicker>
             </div>
             <div class="input_section">
                 <label>
                 Start Time (hh:mm)
                 </label>
-                <input id="start-time-hours" v-model="startTimeHours" type="number" value="0" min="0" max="23">
-                <input id="start-time-minutes" v-model="startTimeMinutes" type="number" value="0" min="0" max="59">
+                <input id="start-time-hours" class="time" v-model="startTimeHours" type="number" value="0" min="0" max="23">
+                <input id="start-time-minutes" class="time" v-model="startTimeMinutes" type="number" value="0" min="0" max="59">
             </div>
             <div class="input_section">
                 <label>
-                End Time (hh:mm)
+                End Time (hh:mm)  
                 </label>
-                <input id="end-time-hours" v-model="endTimeHours" type="number" value="0" min="0" max="23">
-                <input id="end-time-minutes" v-model="endTimeMinutes" type="number" value="0" min="0" max="59">
+                <input id="end-time-hours" class="time" v-model="endTimeHours" type="number" value="0" min="0" max="23">
+                <input id="end-time-minutes" class="time" v-model="endTimeMinutes" type="number" value="0" min="0" max="59">
             </div>
             <div class="input_section">
                 <label>
@@ -62,16 +62,23 @@ import { addNotification } from '../services.js/notifications'
 export default {
     name:'AddMeeting',
     data(){
+        const now = new Date()
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()) 
+        const minDate = new Date(today)
         return{
             name:"",
-            meetingDate: null,
+            meetingDate: "",
             startTimeHours : 0,
             startTimeMinutes: 0,
             endTimeHours : 0,
             endTimeMinutes: 0,
             desc:"",
-            attendees:""
+            attendees:"",
+            min:minDate
         }
+    },
+    beforeMounted(){
+        
     },
     methods:{
         add(){
@@ -115,5 +122,9 @@ export default {
 <style scoped>
 .input_section{
     margin-bottom: 20px;
+}
+.time{
+    margin-left: 10px;
+    margin-right: 10px;
 }
 </style>

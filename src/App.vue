@@ -57,20 +57,16 @@ export default {
     }
   },
   mounted(){
-    console.log('haha');
-    console.log(localStorage.getItem('token'));
+    //console.log(localStorage.getItem('token'));
   },
   methods: {
     userLoggedIn(){
-      console.log('Login ho gya');
       this.isAuth = true;
     },
     userLoggedOut(){
-      console.log('Logout ho gya');
       this.isAuth = false;
     },
     profileUpdated(){
-      console.log('profile update')
       this.trigger = !this.trigger;
     }
   }
