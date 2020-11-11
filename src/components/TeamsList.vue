@@ -1,8 +1,8 @@
 <template>
     <div id="teamsList">
-        <div v-if="this.teams.length == 0">
+        <b-alert show variant="info" class="noTeams" v-if="this.teams.length == 0">
             No available teams
-        </div>
+        </b-alert>
         <b-card class="col-sm-4"
             style="margin:1em"
             v-for="(team,index) in teams" 
@@ -70,5 +70,7 @@ export default {
 }
 </script>
 <style scoped>
-
+.noTeams{
+    margin: 3em;
+}
 </style>
